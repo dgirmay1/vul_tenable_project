@@ -174,7 +174,7 @@ S**Subject:** Vulnerability Remediation Scripts for Testing and Deployment
 Based on our initial vulnerability scan and assessment, I have created a set of scripts to help you tackle the initial remediation efforts. These scripts target key vulnerabilities and can be easily integrated into your deployment platform (e.g., SCCM). Please test them before deploying to production.
 
 ### Vulnerabilities and Remediations:
-1. [**Third-Party Software Removal (Wireshark)**](https://github.com/dgirmay1/remediation-/blob/main/toggle-cipher-suites.ps1)
+1. [**Third-Party Software Removal (Wireshark)**](https://github.com/dgirmay1/remediation-/blob/main/remediation-wireshark-uninstall.ps1)
 2. [**Windows OS Secure Configuration (Insecure Protocols)**](https://github.com/dgirmay1/remediation-/blob/main/toggle-protocols.ps1)
 3. [**Windows OS Secure Configuration (Insecure Ciphersuites)**](https://github.com/dgirmay1/remediation-/blob/main/toggle-cipher-suites.ps1)
 4. [**Windows OS Secure Configuration (Guest Account Group Membership)**](https://github.com/dgirmay1/remediation-/blob/main/toggle-guest-local-administrators.ps1)
@@ -192,9 +192,59 @@ Best regards,
 
 The server team reviewed vulnerability scan results, identifying outdated software, insecure accounts, and deprecated protocols. The remediation packages were prepared for submission to the Change Control Board (CAB). 
 
-<a href="https://youtu.be/0tjjFewxSNw" target="_"><img width="600" src="https://github.com/user-attachments/assets/03027c66-5f7c-42d0-b6dd-09d053c040b1"/></a>
+Context:
+This fictional scenario shows how the vulnerability management team reviews initial scan results with the server team, discusses key findings like outdated software, insecure accounts, and deprecated protocols, and agrees on next steps for remediation and Change Control Board (CAB) submission.
 
-[Meeting Video](https://youtu.be/0tjjFewxSNw)
+Participants:
+
+Priya Sharma — Vulnerability Management Lead
+
+Alex Chen — Server Team Lead
+
+Transcript
+Priya: Good morning, Alex. How’s your Monday going so far?
+
+Alex: Not bad for a Monday — and you?
+
+Priya: Still alive, so I can’t complain! Before we dive into the vulnerabilities, how did the scan go on your end? Any outages or resource spikes?
+
+Alex: The scan went smoothly. We were monitoring everything, and aside from seeing a lot of open connections, you’d barely know it was happening.
+
+Priya: That’s great news. I expected as much, but we’ll keep an eye on it for future scans. Now, do you mind if I walk you through the vulnerability findings?
+
+Alex: Absolutely — go ahead.
+
+Priya: Perfect. I’ll share my screen. The majority of these findings relate to Wireshark being installed — it’s significantly outdated. You can see all these detections are basically old Wireshark versions that need to go.
+
+Alex: Makes sense.
+
+Priya: Another interesting one: the local guest account on several servers is actually part of the local Administrators group. That’s a pretty big risk — I’m not sure why that is, but we’ll want to fix it.
+
+Alex: Agreed — that shouldn’t be the case.
+
+Priya: A few other findings, like the Microsoft Edge Chromium version, may resolve automatically with Windows Updates. Same for some self-signed certificates — those aren’t really a concern in this context.
+
+Alex: Got it.
+
+Priya: The other piece we should address are the medium-strength cipher suites and the use of deprecated TLS 1.0 and 1.1 protocols. These should be disabled as they’re no longer secure.
+
+Alex: Understood. Do you foresee any issues removing those cipher suites and protocols?
+
+Priya: I don’t expect any major issues, but we’ll definitely run it through the next Change Control Board to be safe. Uninstalling Wireshark and removing the guest account should also be straightforward — they really shouldn’t be on these servers in the first place.
+
+Alex: Agreed — I’ll check with our CIS admins about the guest account permissions.
+
+Priya: Great. I’ll go ahead and build out remediation packages for these issues to make things easier for your team.
+
+Alex: Perfect. And as for Windows Updates, we already have our patch management in place, so I’m not worried about those items — they should be handled automatically this week.
+
+Priya: Excellent. I’ll finalize the remediation plan and send it over before the next CAB meeting so we’re all prepared.
+
+Alex: Sounds good. Appreciate you pulling this together.
+
+Priya: Anytime. Talk to you soon, Alex.
+
+Alex: Talk to you soon, Priya. Thanks again.
 
 ---
 
@@ -202,9 +252,43 @@ The server team reviewed vulnerability scan results, identifying outdated softwa
 
 The Change Control Board (CAB) reviewed and approved the plan to remove insecure protocols and cipher suites. The plan included a rollback script and a tiered deployment approach.  
 
-<a href="https://youtu.be/zOFPkTa9kY8" target="_"><img width="600" src="https://github.com/user-attachments/assets/07164e63-fbce-471a-b469-29a6d41b7bb8"/></a>
+Context:
+In this fictional scenario, the Change Control Board (CAB) reviews and approves a remediation plan to remove insecure protocols and cipher suites. The plan outlines the technical solution, includes a tiered deployment approach, and incorporates a rollback plan to minimize risk.
 
-[Meeting Video](https://youtu.be/zOFPkTa9kY8)
+Participants:
+
+Josh Patel — Risk Management Team
+
+Jimmy Lee — Infrastructure Team
+
+CAB Members
+
+Transcript
+CAB Chair: Next on the agenda are a couple of vulnerability remediations for the server team — specifically, the removal of insecure protocols and insecure cipher suites. It looks like Josh from Risk is working with Jimmy from Infrastructure on this. Jimmy, could you walk us through the technical side of the change?
+
+Jimmy: Normally I would, but do you mind if Josh explains? He actually built the solution for us, and we’re still getting familiar with the process.
+
+Josh: Sure, happy to. So, the issue is that having insecure cipher suites and protocols on our servers means the systems are technically capable of negotiating outdated, deprecated algorithms. If a server tries to connect and only supports those insecure methods, there’s a risk the system will accept them.
+
+These settings are managed through the Windows Registry. Our fix is simple: we developed a PowerShell script that disables all insecure protocols and cipher suites, and enables only secure, up-to-date ones that align with current standards.
+
+CAB Member: That sounds straightforward. What happens if something breaks — do we have a rollback plan?
+
+Josh: Absolutely. We have a tiered deployment plan — starting with a small pilot group, then moving to pre-production, and finally rolling out to production. On top of that, we’ve built automated rollback scripts for each remediation. So if any unexpected issue arises, the original registry settings can be restored quickly.
+
+CAB Member: Great. So it’s just registry updates — I don’t see that causing major issues, but it’s good to have a safety net.
+
+Josh: Exactly. It’s a simple change, but we’re taking every precaution.
+
+CAB Chair: Any other questions from the team?
+
+CAB Members: (No further questions.)
+
+CAB Chair: Perfect. That wraps up this item for this week’s CAB meeting. Thanks, everyone — see you next week.
+
+Josh: Thanks, everyone.
+
+Jimmy: See you all next week.
 
 ---
 ### Step 10 ) Remediation Effort
@@ -212,32 +296,32 @@ The Change Control Board (CAB) reviewed and approved the plan to remove insecure
 #### Remediation Round 1: Outdated Wireshark Removal
 
 The server team used a PowerShell script to remove outdated Wireshark. A follow-up scan confirmed successful remediation.  
-[Wireshark Removal Script](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/remediation-wireshark-uninstall.ps1)  
+[Wireshark Removal Script](https://github.com/dgirmay1/remediation-/blob/main/remediation-wireshark-uninstall.ps1)  
 
 <img width="634" alt="image" src="https://github.com/user-attachments/assets/7b4f9ab2-d230-4458-ac0f-c0ff070ae79a">
 
-[Scan 2 - Third Party Software Removal](https://drive.google.com/file/d/1UiwPPTtuSZKk02hiMyXf31pXUIeC5EWt/view?usp=drive_link)
+[Scan 2 - Third Party Software Removal](https://drive.google.com/file/d/1sPxqr4qjbzI3A00--axgGueiot97BxLI/view?usp=sharing)
 
 
 #### Remediation Round 2: Insecure Protocols & Ciphers
 
 The server team used PowerShell scripts to remediate insecure protocols and cipher suites. A follow-up scan verified successful remediation, and the results were saved for reference.  
-[PowerShell: Insecure Protocols Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-protocols.ps1)
-[PowerShell: Insecure Ciphers Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-cipher-suites.ps1)
+[PowerShell: Insecure Protocols Remediation](https://github.com/dgirmay1/remediation-/blob/main/toggle-protocols.ps1) and
+[PowerShell: Insecure Ciphers Remediation](https://github.com/dgirmay1/remediation-/blob/main/toggle-cipher-suites.ps1)
 
 <img width="630" alt="image" src="https://github.com/user-attachments/assets/0e96120d-8ec9-4f76-8e42-79c752200010">
 
-[Scan 3 - Ciphersuites and Protocols](https://drive.google.com/file/d/1Qc6-ezQvwReCGUZNtnva0kCZo_-zW-Sm/view?usp=drive_link)
+[Scan 3 - Ciphersuites and Protocols](https://drive.google.com/file/d/1tPpdydOqS-w9X57IHAaWZJx-lg9l3Ai5/view?usp=sharing)
 
 
 #### Remediation Round 3: Guest Account Group Membership
 
 The server team removed the guest account from the administrator group. A new scan confirmed remediation, and the results were exported for comparison.  
-[PowerShell: Guest Account Group Membership Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-guest-local-administrators.ps1)  
+[PowerShell: Guest Account Group Membership Remediation](https://github.com/dgirmay1/remediation-/blob/main/toggle-guest-local-administrators.ps1)  
 
 <img width="627" alt="image" src="https://github.com/user-attachments/assets/870a3eac-3398-44fe-91c0-96f3c2578df4">
 
-[Scan 4 - Guest Account Group Removal](https://drive.google.com/file/d/1jVgikjfrV1YjOcL3QRT_oUB0Y82w22V7/view?usp=drive_link)
+[Scan 4 - Guest Account Group Removal](https://drive.google.com/file/d/1u4tq9ULQgIOUpuA0nlyvbZRdWF04YaWj/view?usp=sharing)
 
 
 #### Remediation Round 4: Windows OS Updates
@@ -246,7 +330,7 @@ Windows updates were re-enabled and applied until the system was fully up to dat
 
 <img width="627" alt="image" src="https://github.com/user-attachments/assets/870a3eac-3398-44fe-91c0-96f3c2578df4">
 
-[Scan 5 - Post Windows Updates](https://drive.google.com/file/d/1tmDjeHl5uiGitRwWy8kFRi33q-nGi1Zt/view?usp=drive_link)
+[Scan 5 - Post Windows Updates](https://drive.google.com/file/d/1hdoNuj7kDC3RJonDDmjw0fPb0vJVj2Sy/view?usp=sharing)
 
 ---
 

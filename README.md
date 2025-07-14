@@ -340,7 +340,7 @@ The remediation process reduced total vulnerabilities by 80%, from 30 to 6. Crit
 
 <img width="1920" alt="image" src="https://github.com/user-attachments/assets/51f0aae8-7f36-4d90-b29f-5257e57155f9">
 
-[Remediation Data](https://docs.google.com/spreadsheets/d/1FTtFfZYmFsNLU6pm8nTzsKyKE-d2ftXzX_DPwcnFNfA/edit?gid=0#gid=0)
+[Remediation Data](https://docs.google.com/spreadsheets/d/1dDK3gcObcFeECHhuASkDhjJnaQAbYp15plizasXMfQk/edit?usp=sharing)
 
 ---
 

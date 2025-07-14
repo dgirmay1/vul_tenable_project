@@ -2,7 +2,7 @@
 
 # Vulnerability Management Program Implementation
 
-In this project, we simulate the implementation of a comprehensive vulnerability management program, from inception to completion.
+In this project, I simulate the implementation of a comprehensive vulnerability management program, from inception to completion.
 
 _**Inception State:**_ the organization has no existing policy or vulnerability management practices in place.
 
@@ -48,31 +48,96 @@ This phase focuses on drafting a Vulnerability Management Policy as a starting p
 
 ### Step 2) Mock Meeting: Policy Buy-In (Stakeholders)
 
-In this phase, a meeting with the server team introduces the draft Vulnerability Management Policy and assesses their capability to meet remediation timelines. Feedback leads to adjustments, like extending the critical remediation window from 48 hours to one week, ensuring collaborative implementation.
+Context: This fictional conversation demonstrates how a vulnerability management professional collaborates with the server team to present the draft Vulnerability Management Policy and adjust initial remediation timelines based on real-world capacity and feedback.
 
-<a href='https://youtu.be/8g6uafc6LjE' target="_"><img width="600" alt="image" src="https://github.com/user-attachments/assets/549d21f4-26c2-412d-9117-d7b6835aedbf"></a>
+Participants:
 
-[YouTube Video: Stakeholder Policy Buy-In Meeting](https://youtu.be/8g6uafc6LjE)
+Priya Sharma — Vulnerability Management Lead
+
+Alex Chen — Server Team Lead
+
+Transcript
+Priya: Good morning, Alex. Thanks for making time to discuss the draft Vulnerability Management Policy.
+
+Alex: Good morning, Priya. No problem always glad to help shape this from the start.
+
+Priya: I wanted to walk through the proposed remediation timelines. For now, the draft sets a 48-hour window for addressing critical vulnerabilities. Does that feel achievable for your team?
+
+Alex: Honestly, with our current staffing and workload, that’s going to be challenging. Some of our systems are quite complex, and urgent patches often require thorough testing to avoid downtime.
+
+Priya: That makes sense we definitely don’t want to rush changes that could impact availability. Would extending the critical window to one week be more realistic for now?
+
+Alex: I think a one-week timeline for criticals would be manageable to start with. We’d still prioritize the most severe issues, but it gives us enough time for proper testing and deployment.
+
+Priya: Perfect. For any zero-day vulnerabilities that pose an immediate risk, we’d still aim to patch those within 48 hours or sooner if possible.
+
+Alex: That’s reasonable. Having that flexibility helps the team plan better.
+
+Priya: Great. We’ll also include an adjustment period for everyone to get familiar with the new policy. I’m proposing a six-month transition window where we monitor how teams are meeting the timelines and make any needed tweaks.
+
+Alex: That’s appreciated. It gives us time to build out our patching workflows and allocate resources where needed.
+
+Priya: Absolutely. We’re all on the same page the goal is to improve security without putting too much strain on operations.
+
+Alex: Agreed. Thanks for including us early in the process. It makes a big difference when we feel like we have input.
+
+Priya: Of course collaboration is key. I’ll incorporate your feedback and share the revised draft later this week.
+
+Alex: Sounds good. Thanks again, Priya. Looking forward to working together on this.
+
+Priya: Likewise, Alex. Have a great rest of your day!
 
 ---
 
 ### Step 3) Policy Finalization and Senior Leadership Sign-Off
 
 After gathering feedback from the server team, the policy is revised, addressing aggressive remediation timelines. With final approval from upper management, the policy now guides the program, ensuring compliance and reference for pushback resolution.  
-[Finalized Policy](https://docs.google.com/document/d/1rvueLX_71pOR8ldN9zVW9r_zLzDQxVsnSUtNar8ftdg/edit?usp=drive_link)
-<div style="text-align: center;">
-    <img src="https://github.com/user-attachments/assets/9afcdbc1-0493-4af2-9287-1cb9b8f59b40" alt="image" width="400">
-</div>
+[Finalized Policy](https://docs.google.com/document/d/1OhpHJYpMJHIrTf64UKz6qsTzpTWhPauQJU-IpSzWfCI/edit?usp=sharing)
 
 ---
 
 ### Step 4) Mock Meeting: Initial Scan Permission (Server Team)
 
-The team collaborates with the server team to initiate scheduled credential scans. A compromise is reached to scan a single server first, monitoring resource impact, and using just-in-time Active Directory credentials for secure, controlled access.  
+Context: This fictional scenario demonstrates how a vulnerability management team works collaboratively with the server team to initiate scheduled, credentialed scans. The conversation covers addressing security concerns, minimizing operational impact, and agreeing on secure access methods.
 
-<a href='https://youtu.be/lg068WA4SKM' target="_"><img width="600" alt="image" src="https://github.com/user-attachments/assets/31fe8d0f-636b-475b-8d5a-a2795c183f86"></a>
+Participants:
 
-[YouTube Video: Initial Discovery Scan](https://youtu.be/lg068WA4SKM)
+Priya Sharma — Vulnerability Management Lead
+
+Alex Chen — Server Team Lead
+
+Transcript
+Priya: Good morning, Alex. I appreciate you meeting today to go over our initial scanning plan.
+
+Alex: Good morning, Priya. No problem I heard you’re ready to get started?
+
+Priya: Yes now that our Vulnerability Management Policy is approved, we’re ready to begin scheduled credentialed scans of the server environment.
+
+Alex: Sounds good. What’s involved, and how can we help?
+
+Priya: We’re planning to run weekly scans across the server infrastructure. We estimate it will take about 4 to 6 hours to cover all 200 assets. To get the most accurate results, we’ll need administrative credentials so the scan engine can log into each target and perform a deeper assessment.
+
+Alex: Hold on can you clarify what scanning actually entails? I’m a bit concerned about the impact on server performance. Also, you’re asking for admin credentials to all 200 machines that feels risky.
+
+Priya: Those are completely valid concerns. The scan engine will send controlled traffic to the servers to check for vulnerabilities for example, it will verify registry keys, check for outdated software, and flag any insecure protocols or cipher suites. The scans won’t take systems offline, but we can monitor performance to be sure.
+
+Alex: Okay, that makes sense. As long as we’re sure the scans won’t disrupt services.
+
+Priya: To be extra cautious, let’s start by scanning a single server first and monitor the resource utilization closely. If everything looks good, we can expand gradually.
+
+Alex: I like that approach. And about the credentials is there a way to keep that secure?
+
+Priya: Definitely. Would you be able to set up an account in Active Directory specifically for this? You can keep it disabled until the scan window, then enable it while we scan, and disable it again afterward. It’s a just-in-time access approach to minimize risk.
+
+Alex: That works. I’ll ask Susan to get started on automating the account provisioning so it’s easy to manage.
+
+Priya: Perfect. Once the test scan is done, we can review the results together and confirm the broader schedule.
+
+Alex: Sounds good. I’ll get back to you once the AD credentials are ready. Thanks for working with us on this.
+
+Priya: Absolutely appreciate the collaboration. Talk soon!
+
+Alex: See you later, Priya.
 
 ---
 
@@ -80,9 +145,7 @@ The team collaborates with the server team to initiate scheduled credential scan
 
 In this phase, an insecure Windows Server is provisioned to simulate the server team's environment. After creating vulnerabilities, an authenticated scan is performed, and the results are exported for future remediation steps.  
 
-<img width="635" alt="image" src="https://github.com/user-attachments/assets/937cccbd-36bb-4445-97b9-e915085cda81" style="border: 2px solid black;">
-
-[Scan 1 - Initial Scan](https://drive.google.com/file/d/1RBPVj_azKJMwmRZ8QILlb4hxIjQU3wQ7/view?usp=drive_link)
+[Scan 1 - Initial Scan](https://drive.google.com/file/d/1oub7ffdHydHge33j301xF_MZahzgGp5i/view?usp=sharing)
 
 
 
@@ -91,7 +154,7 @@ In this phase, an insecure Windows Server is provisioned to simulate the server 
 
 ### Step 6) Vulnerability Assessment and Prioritization
 
-We assessed vulnerabilities and established a remediation prioritization strategy based on ease of remediation and impact. The following priorities were set:
+I assessed vulnerabilities and established a remediation prioritization strategy based on ease of remediation and impact. The following priorities were set:
 
 1. Third Party Software Removal (Wireshark)
 2. Windows OS Secure Configuration (Protocols & Ciphers)
@@ -104,9 +167,24 @@ We assessed vulnerabilities and established a remediation prioritization strateg
 
 The server team received remediation scripts and scan reports to address key vulnerabilities. This streamlined their efforts and prepared them for a follow-up review.  
 
-<img width="635" alt="image" src="https://github.com/user-attachments/assets/bbf9478f-e1d1-4898-846e-b510ec8c6f72">
+S**Subject:** Vulnerability Remediation Scripts for Testing and Deployment
 
-[Remediation Email](https://github.com/joshmadakor1/lognpacific-public/blob/main/misc/remediation-email.md)
+**Hi [Team],**
+
+Based on our initial vulnerability scan and assessment, I have created a set of scripts to help you tackle the initial remediation efforts. These scripts target key vulnerabilities and can be easily integrated into your deployment platform (e.g., SCCM). Please test them before deploying to production.
+
+### Vulnerabilities and Remediations:
+1. [**Third-Party Software Removal (Wireshark)**](https://github.com/dgirmay1/remediation-/blob/main/toggle-cipher-suites.ps1)
+2. [**Windows OS Secure Configuration (Insecure Protocols)**](https://github.com/dgirmay1/remediation-/blob/main/toggle-protocols.ps1)
+3. [**Windows OS Secure Configuration (Insecure Ciphersuites)**](https://github.com/dgirmay1/remediation-/blob/main/toggle-cipher-suites.ps1)
+4. [**Windows OS Secure Configuration (Guest Account Group Membership)**](https://github.com/dgirmay1/remediation-/blob/main/toggle-guest-local-administrators.ps1)
+
+Let me know if you have any questions or need any adjustments!
+
+Best regards,
+
+**Dogol Girmay, Security Analyst**<br/>
+**Governance, Risk, and Compliance**
 
 ---
 
@@ -184,7 +262,7 @@ The remediation process reduced total vulnerabilities by 80%, from 30 to 6. Crit
 
 ### On-going Vulnerability Management (Maintenance Mode)
 
-After completing the initial remediation cycle, the vulnerability management program transitions into **Maintenance Mode**. This phase ensures that vulnerabilities continue to be managed proactively, keeping systems secure over time. Regular scans, continuous monitoring, and timely remediation are crucial components of this phase. (See [Finalized Policy](https://docs.google.com/document/d/1rvueLX_71pOR8ldN9zVW9r_zLzDQxVsnSUtNar8ftdg/edit?usp=drive_link) for scanning and remediation cadence requirements.)
+After completing the initial remediation cycle, the vulnerability management program transitions into **Maintenance Mode**. This phase ensures that vulnerabilities continue to be managed proactively, keeping systems secure over time. Regular scans, continuous monitoring, and timely remediation are crucial components of this phase. (See [Finalized Policy](https://docs.google.com/document/d/1OhpHJYpMJHIrTf64UKz6qsTzpTWhPauQJU-IpSzWfCI/edit?usp=sharing) for scanning and remediation cadence requirements.)
 
 Key activities in Maintenance Mode include:
 - **Scheduled Vulnerability Scans**: Perform regular scans (e.g., weekly or monthly) to detect new vulnerabilities as systems evolve.
